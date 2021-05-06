@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>parser module &#8212; RGem_parser 1.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RGem_parser 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-parser">
+<span id="parser-module"></span><h1>parser module<a class="headerlink" href="#module-parser" title="Permalink to this headline">¶</a></h1>
+<p>This is an interface to Python’s internal parser.</p>
+<dl class="exception">
+<dt id="parser.ParserError">
+<em class="property">exception </em><code class="descclassname">parser.</code><code class="descname">ParserError</code><a class="headerlink" href="#parser.ParserError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="parser.STType">
+<code class="descclassname">parser.</code><code class="descname">STType</code><a class="headerlink" href="#parser.STType" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">parser.st</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.compilest">
+<code class="descclassname">parser.</code><code class="descname">compilest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.compilest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compiles an ST object into a code object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.expr">
+<code class="descclassname">parser.</code><code class="descname">expr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ST object from an expression.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.isexpr">
+<code class="descclassname">parser.</code><code class="descname">isexpr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.isexpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if an ST object was created from an expression.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.issuite">
+<code class="descclassname">parser.</code><code class="descname">issuite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.issuite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if an ST object was created from a suite.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.sequence2st">
+<code class="descclassname">parser.</code><code class="descname">sequence2st</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.sequence2st" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ST object from a tree representation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.st2list">
+<code class="descclassname">parser.</code><code class="descname">st2list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.st2list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list-tree representation of an ST.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.st2tuple">
+<code class="descclassname">parser.</code><code class="descname">st2tuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.st2tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a tuple-tree representation of an ST.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.suite">
+<code class="descclassname">parser.</code><code class="descname">suite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.suite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ST object from a suite.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="parser.tuple2st">
+<code class="descclassname">parser.</code><code class="descname">tuple2st</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parser.tuple2st" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ST object from a tree representation.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RGem_parser 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Rahul and Ayush.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>
