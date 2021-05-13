@@ -392,7 +392,7 @@ def extract_degree(nlp_text,noun_chunks):
     '''
     tokens = [token.text for token in nlp_text if not token.is_stop]
     
-    with open('../parser/degree.csv') as f1:
+    with open('../pyresparser/degree.csv') as f1:
         reader = csv.reader(f1)
         data = list(reader)
 
@@ -430,7 +430,7 @@ def extract_location(nlp_text,noun_chunks):
     '''
     tokens = [token.text for token in nlp_text if not token.is_stop]
     
-    with open('../parser/location.csv') as f1:
+    with open('../pyresparser/location.csv') as f1:
         reader = csv.reader(f1)
         data = list(reader)
 
@@ -530,7 +530,7 @@ def extract_college(nlp_text,noun_chunks):
 
     except:
 
-        with open('../parser/College.csv') as f1:
+        with open('../pyresparser/College.csv') as f1:
             reader = csv.reader(f1)
             data = list(reader)
 
