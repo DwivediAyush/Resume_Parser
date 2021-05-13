@@ -26,18 +26,14 @@ class ResumeParser(object):
         self.__custom_regex = custom_regex
         self.__matcher = Matcher(nlp.vocab)
         self.__details = {
-            'name': {
-                'First':None,
-                'Middle':None,
-                'Last':None},
+            'name': None,
             'email': None,
             'mobile_number': None,
-            #'url' : None,
+            'url' : None,
             'skills': None,
-            'Qulifications':{
             'Institute_name': None,
-            'Stream': None,},
-            'total_experience': None,
+            'education_and_training': None,
+            # 'total_experience': None,
             'Current Location':None,
         }
         self.__resume = resume
@@ -74,25 +70,13 @@ class ResumeParser(object):
                     self.__noun_chunks,
                     self.__skills_file
                 )
-        
-        # extract name
         try:
-            split_name=cust_ent['Name'][0].split(' ')
-            self.__details['name']['First'] =split_name[0]
-            if len(split_name)==3:
-                self.__details['name']['Middle'] =split_name[1]
-            self.__details['name']['Last'] =split_name[-1]
-
+            self.__details['name'] = cust_ent['Name'][0]
         except (IndexError, KeyError):
-            split_name=name.split(' ')
-            self.__details['name']['First'] =split_name[0]
-            if len(split_name)==3:
-                self.__details['name']['Middle'] =split_name[1]
-            self.__details['name']['Last'] =split_name[-1]
-            
+            self.__details['name'] = name
 
 
-        total_experience = utils.extracts_experience(self.__text)
+        # total_experience = utils.extracts_experience(self.__text)
 
         education_and_training = utils.extract_degree(self.__nlp,self.__noun_chunks)
         
@@ -111,14 +95,14 @@ class ResumeParser(object):
         entities = utils.extract_entity_sections_grad(self.__text_raw)
 
 
-        #resume_link = utils.resume_link(self.__file,self.__argument)
+        # resume_link = utils.resume_link(self.__file,self.__argument)
 
-        #self.__details['url'] = resume_link
-        edu = utils.extract_education(
-                      [sent.string.strip() for sent in self.__nlp.sents]
-              )
+        # self.__details['url'] = resume_link
+        # edu = utils.extract_education(
+        #               [sent.string.strip() for sent in self.__nlp.sents]
+        #       )
 
-        
+        # extract name
 
 
         # extract email
@@ -133,21 +117,21 @@ class ResumeParser(object):
         # extract college name
         
         try: 
-            self.__details['Qulifications']['Institute_name'] = cust_ent['College Name']
+            self.__details['Institute_name'] = cust_ent['College Name']
         except:
-            self.__details['Qulifications']['Institute_name'] = college
+            self.__details['Institute_name'] = college
 
         # extract education_and_training
         try:
-            self.__details['Qulifications']['Stream'] = cust_ent['Degree']
+            self.__details['education_and_training'] = cust_ent['Degree']
         except KeyError:
-            self.__details['Qulifications']['Stream'] = education_and_training
+            self.__details['education_and_training'] = education_and_training
 
 
-        try:
-            self.__details['total_experience'] = cust_ent['Years of Experience']                  
-        except (IndexError, KeyError):
-            self.__details['total_experience'] = total_experience
+        # try:
+        #     self.__details['total_experience'] = cust_ent['Years of Experience']                  
+        # except (IndexError, KeyError):
+        #     self.__details['total_experience'] = total_experience
 
         return
 

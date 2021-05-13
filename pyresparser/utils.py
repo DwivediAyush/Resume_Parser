@@ -225,27 +225,27 @@ def extract_entities_wih_custom_model(custom_nlp_text):
     return entities
 
 
-def get_total_experience(experience_list):
-    '''
-    Wrapper function to extract total months of experience from a resume
+# def get_total_experience(experience_list):
+#     '''
+#     Wrapper function to extract total months of experience from a resume
 
-    :param experience_list: list of experience text extracted
-    :return: total months of experience
-    '''
-    exp_ = []
-    for line in experience_list:
-        experience = re.search(
-            r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present)',
-            line,
-            re.I
-        )
-        if experience:
-            exp_.append(experience.groups())
-    total_exp = sum(
-        [get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
-    )
-    total_experience_in_months = total_exp
-    return total_experience_in_months
+#     :param experience_list: list of experience text extracted
+#     :return: total months of experience
+#     '''
+#     exp_ = []
+#     for line in experience_list:
+#         experience = re.search(
+#             r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present)',
+#             line,
+#             re.I
+#         )
+#         if experience:
+#             exp_.append(experience.groups())
+#     total_exp = sum(
+#         [get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
+#     )
+#     total_experience_in_months = total_exp
+#     return total_experience_in_months
 
 
 # def get_number_of_months_from_dates(date1, date2):
@@ -445,10 +445,10 @@ def extract_location(nlp_text,noun_chunks):
             location_set.append(token)
 
     # check for bi-grams and tri-grams
-    for token in noun_chunks:
-        token = token.text.lower().strip()
-        if token in location_list:
-            location_set.append(token)
+    # for token in noun_chunks:
+    #     token = token.text.lower().strip()
+    #     if token in location_list:
+    #         location_set.append(token)
     if location_set:
         location_set = location_set[0]
 
@@ -466,98 +466,33 @@ def extract_college(nlp_text,noun_chunks):
     :return: string of college Name
     '''
     tokens = [token.text for token in nlp_text if not token.is_stop]
-    try:
-        temp_str=" ".join(tokens)
-        temp_str=temp_str.upper()
-        temp_list=[]
+    
+    with open('../pyresparser/College.csv') as f1:
+        reader = csv.reader(f1)
+        data = list(reader)
+    
+    college_list = [item for sublist in data for item in sublist]
 
-        s_index=temp_str.find(temp_var.upper())
-        temp_list.append(s_index)
-        temp_list.append(temp_str.find('EDUCATION'))
+    
+    collegeset = []
+    # check for one-grams
+    for token in tokens:
+        if token.lower() in college_list:
+            collegeset.append(token)
 
-        temp_list.append(temp_str.find('EDUCATIONAL'))
-
-        temp_list.append(temp_str.find('ENGINEERING'))
-
-        temp_list.append( temp_str.find('EDUCATIONS'))
-
-        temp_list.append(temp_str.find('QULIFICATION'))
-        temp_list=list(set(temp_list))
-        temp_list.sort()
-        s_index=temp_list[-1]
-        #print(s_index)
-
-        temp=temp_str[s_index:]
-        #print(temp)
-
-        end_index=temp.find('INTERMEDIATE')
-        if end_index==-1:
-            end_index = temp.find('UNIVERSITY')+len('UNIVERSITY')
-            #print(end_index)
-            if end_index <len('UNIVERSITY'):
-                end_index=-1
-                for i in range(len(temp)):
-                    if temp[i].isdigit()==True:
-                        #print(temp[i])
-                        end_index=i
-                        break
-        if end_index!=-1:
-            temp=temp[:end_index]
-            #print(temp)
-
-
-        #print('hii')
-        temp=temp.upper()
-        maxi=temp.find('TECHNOLOGY')
-        maxi=max(maxi,temp.find('APPLICATION'))
-        maxi=max(maxi,temp.find('SCIENCE'))
-        maxi = max(maxi, temp.find('ENGINEERING'))
-        maxi=max(maxi, temp.find('ENGG.'))
-        maxi = max(maxi, temp.find('BCA'))
-        maxi = max(maxi, temp.find('MCA'))
-        maxi = max(maxi, temp.find('ELECTRONICS'))
-        maxi = max(maxi, temp.find('MECHANICAL'))
-        #print(maxi)
-        temp1=temp[maxi:].split()
-        #print(temp1)
-        #temp1.remove(',')
-        if len(temp1)==0:
-
-            raise TypeError("len0")
-        #print('hii')
-        #print(" ".join(temp1[1:]))
-        return " ".join(temp1[1:])
-
-    except:
-
-        with open('../pyresparser/College.csv') as f1:
-            reader = csv.reader(f1)
-            data = list(reader)
-
-        college_list = [item for sublist in data for item in sublist]
-
-
-        collegeset = []
-        # check for one-grams
-        for token in tokens:
-            if token.lower() in college_list:
+    # print (noun_chunks)
+    # check for bi-grams and tri-grams
+    for token in noun_chunks:
+        token = token.text.lower().strip()
+        if token in college_list:
+            if token not in collegeset:
                 collegeset.append(token)
 
-        #print (collegeset)
-        # check for bi-grams and tri-grams
-        for token in noun_chunks:
-            token = token.text.lower().strip()
+    lis =  [i.capitalize() for i in ([i.lower() for i in collegeset])]   
 
-            if token in college_list:
-                #print(token)
-                if token not in collegeset:
-                    collegeset.append(token)
+    college_string = ",".join(lis) 
 
-        lis =  [i.capitalize() for i in ([i.lower() for i in collegeset])]
-
-        college_string = ",".join(lis)
-        #print(college_string)
-        return college_string
+    return college_string
 
 
 def extracts_experience(text):
